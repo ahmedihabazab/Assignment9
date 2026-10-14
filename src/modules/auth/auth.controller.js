@@ -29,22 +29,6 @@ authController.post("/login", async (req, res) => {
         falsy: ["sara", "hagar"],
       }),
     })
-    .superRefine(
-      (value , ctx) => {
-        if(value.password !== value.confirmPassword){
-          ctx.addIssue({
-            code : "custom" ,
-            message : "password not confirmed" ,
-          })
-        } 
-        if (value.age < 18) {
-          ctx.addIssue({
-            path : ["age"] ,
-            message : "under age"
-          })
-        }
-      },
-    );
 
   const validatedData = loginSchema.safeParse(req.body);
 
